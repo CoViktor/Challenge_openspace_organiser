@@ -19,7 +19,7 @@ class Seat:
 
 # 1.2 Table
 class Table:
-    def __init__(self, capacity=6):
+    def __init__(self, capacity=4):
         '''# In the same file, create a class Table with ? attributes:
 
 # capacity which is an integer

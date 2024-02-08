@@ -15,9 +15,15 @@
 # Launch the organizer. Display the results.
 
 from utils.table import Table, Seat
-
-test = Table()
-test.who_sits_here()
-test.assign_seat('Me')
-test.who_sits_here()
-print('done')
+from utils.openspace import Openspace
+#-----------Testing---------------------
+# test = Table()
+# test.who_sits_here()
+# test.assign_seat('Me')
+# test.who_sits_here()
+# print('done')
+#--------------------------------------
+#doe hier:
+#import de lijst met collega's
+#maak een openspace
+#openspace.organize(names=[]) -> add alle mensen vd lijst
