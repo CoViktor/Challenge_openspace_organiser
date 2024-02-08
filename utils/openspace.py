@@ -17,19 +17,42 @@ class Openspace():
         for x in range(self.number_of_tables):
             table = Table()
             self.tables.append(table)
+        self.waiting_line =[]
 
-# And some methods:
-# organize(names) that will:
-    #def organize(names=[]):
-        #'''Randomly assign people to Seat objects in the different Table objects'''
-        #fill names with names from csv file
-        #for name in names: pick a random table and then fill seats
-        #OF: randomly pick names from the list that weren't added yet and fill seats in order
-        #-> might be preferrable so that people are not on their own
-        #check of er nog plaatsen over zijn
-            #vs what to do when too little places
-        #mss alle mensen in de lijst steken en assignment gelijk zetten met removal vd list
-        #kan dan ook nog de namen in de list geven die niet konden geassignd worden wegens plaatsgebrek
+    def organize(self, names = call_data()):
+        '''Randomly assign people to Seat objects in the different Table objects'''
+        #maak nog random via r.shuffle(colleagues)
+        colleagues = names
+        full_tables = 0
+        for name in colleagues:
+            #goes over each table
+            for n in range(self.number_of_tables):
+#INSERT MANIER OM EERST TE CHECKEN OF ALLE TAFELS VOL ZIJN EN TE REAGEREN
+#REKENING HOUDEND MET DAT IK OVER 24 PERSONEN GA
+                #checks if this loop iteration == max amount of tables
+                if n == (self.number_of_tables):
+                    self.waiting_line.append(name)
+                    print(f'{name} has no seat')
+                elif not self.tables[n].has_free_spot():
+                    continue
+                else:
+                    for seat in self.tables[n].seats:
+                        if seat.occupant == 'Unoccupied':
+                            seat.occupant = name
+                            print(f'{name} has a seat now')
+                            break
+                        else:
+                            continue
+                    break
+                break
+                #ga over seats
+                    #als vol, move table
+                    #assign seat
+                #als elke table vol, append to waiting_line        
+        #check of er nog plaatsen over zijn en print hoeveel
+            
+        #hou rekening met manier om te zorgen dat niemand op zelfde seat zit als dag ervoor? -> extra
+
             
     #def display():
         #'''display the different tables and there occupants in a nice and readable way'''
@@ -40,4 +63,8 @@ class Openspace():
 
 
 #----------testing----------------
-# room1 = Openspace(3)
+room1 = Openspace(3)
+room1.organize()
+for table in room1.tables:
+    table.who_sits_here()
+print(f"Still unseated are: {room1.waiting_line}") #Y tho?

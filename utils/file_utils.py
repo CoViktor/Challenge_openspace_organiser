@@ -10,4 +10,4 @@ def call_data():
             all_colleagues.append(clean_row)
     return all_colleagues
 
-print(call_data())
+call_data()
