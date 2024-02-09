@@ -1,5 +1,3 @@
-### READ ME
-
 # Openspace Organiser Challenge
 
 ## Description
