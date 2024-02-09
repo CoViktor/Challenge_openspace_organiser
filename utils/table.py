@@ -13,7 +13,6 @@ class Seat:
         self.occupant = 'Unoccupied'
         self.free = True
 
-# 1.2 Table
 class Table:
     def __init__(self, capacity=4):
         '''Table class, called when creating an open space. 
@@ -26,7 +25,7 @@ class Table:
         for x in range(capacity):
             seat= Seat()
             self.seats.append(seat)
-    def left_capacity(self): #fix this
+    def left_capacity(self):
         empty_seats = 0
         for x in self.seats:
             if x.occupant == 'Unoccupied':
