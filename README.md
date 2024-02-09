@@ -17,9 +17,12 @@ Enjoy meeting everybody! 😁
 ## Installation 🚧
 
 The program is run in python and a few dependencies are used.
-Simply press 'windows + R'copy paste and enter the following lines.
+Simply press 'windows + R' and copy paste and enter the following lines.
+
 `pip install CSV`
+
 `pip install openpyxl`
+
 
 ## Usage ✔️
 Only 'main.py' should be used to run this code.
