@@ -1,11 +1,6 @@
 ### Plan of attack
 
-## 3: Structure sidefiles with comments
-https://github.com/becodeorg/GNT-Arai-6/blob/main/projects/01-openspace-organizer/openspace_organizer.md
-## 4: Do the thing
-
-- Commit a lot
-
 ## 5: Update README.md
 
 ## 6: Read criteria & add nicetohaves
+-openspace function to call specific person, call seat.remove_occupant & add this person to waiting list

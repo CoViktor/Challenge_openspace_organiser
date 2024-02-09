@@ -37,19 +37,8 @@ class Openspace():
                     if not self.tables[n].has_free_spot():
                         continue
                     else:
-                        for seat in self.tables[n].seats:
-                            if seat.occupant == 'Unoccupied':
-                                seat.occupant = colleagues[i]
-                                print(f'{colleagues[i]} has a seat now')
-                                break
-                            else:
-                                continue
+                        self.tables[n].assign_seat(colleagues[i])
                         break
-                #ga over seats
-                    #als vol, move table
-                    #assign seat
-                #als elke table vol, append to waiting_line        
-        #check of er nog plaatsen over zijn en print hoeveel
             
         #hou rekening met manier om te zorgen dat niemand op zelfde seat zit als dag ervoor? -> extra
 
@@ -63,8 +52,9 @@ class Openspace():
 
 
 #----------testing----------------
-room1 = Openspace(7)
+room1 = Openspace(4)
 room1.organize()
 for table in room1.tables:
     table.who_sits_here()
 print(f"Still unseated are: {room1.waiting_line}")
+#issue: 1 person missing?
