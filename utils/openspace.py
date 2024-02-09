@@ -1,6 +1,6 @@
 
-from table import Table
-from file_utils import call_data
+from .table import Table
+from .file_utils import call_data
 import random as r
 import openpyxl
 
