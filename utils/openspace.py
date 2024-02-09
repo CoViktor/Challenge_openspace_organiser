@@ -8,14 +8,15 @@ import random as r
 
 
 class Openspace():
-    def __init__(self, number_of_tables= 6):
+    def __init__(self, number_of_tables= 6, seats_per_table=4):
         '''tablecount = amount of tables (default= 4)
         this amount will be assigned on initialisation of the object
         tables = list of all tables in the space'''
         self.tables = []
-        self.number_of_tables = number_of_tables #-> is this needed?? make sure to refactor all if i don't do this
+        self.number_of_tables = number_of_tables
+        self.seats_per_table = seats_per_table
         for x in range(self.number_of_tables):
-            table = Table()
+            table = Table(self.seats_per_table)
             self.tables.append(table)
         self.waiting_line =[]
 
@@ -24,27 +25,26 @@ class Openspace():
         #maak nog random via r.shuffle(colleagues)
         colleagues = names
         full_tables = 0
-        for name in colleagues:
+        for i in range(len(colleagues)):
             #goes over each table
-            for n in range(self.number_of_tables):
-#INSERT MANIER OM EERST TE CHECKEN OF ALLE TAFELS VOL ZIJN EN TE REAGEREN
-#REKENING HOUDEND MET DAT IK OVER 24 PERSONEN GA
-                #checks if this loop iteration == max amount of tables
-                if n == (self.number_of_tables):
-                    self.waiting_line.append(name)
-                    print(f'{name} has no seat')
-                elif not self.tables[n].has_free_spot():
-                    continue
-                else:
-                    for seat in self.tables[n].seats:
-                        if seat.occupant == 'Unoccupied':
-                            seat.occupant = name
-                            print(f'{name} has a seat now')
-                            break
-                        else:
-                            continue
-                    break
-                break
+            if i > (self.number_of_tables*self.seats_per_table): 
+                    '''Checks if number of student selected in is equal to tables*seats/table, 
+                    to see if there's enough places. Should I look for a way to easily swap this parameter from outside?'''
+                    self.waiting_line.append(colleagues[i])
+                    print(f'{colleagues[i]} has no seat')
+            else:
+                for n in range(self.number_of_tables):
+                    if not self.tables[n].has_free_spot():
+                        continue
+                    else:
+                        for seat in self.tables[n].seats:
+                            if seat.occupant == 'Unoccupied':
+                                seat.occupant = colleagues[i]
+                                print(f'{colleagues[i]} has a seat now')
+                                break
+                            else:
+                                continue
+                        break
                 #ga over seats
                     #als vol, move table
                     #assign seat
@@ -63,8 +63,8 @@ class Openspace():
 
 
 #----------testing----------------
-room1 = Openspace(3)
+room1 = Openspace(7)
 room1.organize()
 for table in room1.tables:
     table.who_sits_here()
-print(f"Still unseated are: {room1.waiting_line}") #Y tho?
+print(f"Still unseated are: {room1.waiting_line}")
