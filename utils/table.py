@@ -34,7 +34,7 @@ class Table:
         return empty_seats
 
     def has_free_spot(self):
-        return self.left_capacity() > 0:
+        return self.left_capacity() > 0
 
     def assign_seat(self, name):
         '''assign_seat(name) that places someone at the table'''
