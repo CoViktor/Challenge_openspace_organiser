@@ -44,8 +44,4 @@ class Table:
             else:
                 seat.set_occupant(name)
                 break
-    def who_sits_here(self): #EXTRA: Just for testing whether seat assignment works, make cleaner
-        print('At this table is seated:')
-        for x in self.seats:
-            print(x.occupant)
 

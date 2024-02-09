@@ -1,6 +1,5 @@
-#? Store variables here?
-
 def call_data():
+    '''returns a list of objects from a csv file'''
     all_colleagues = []
 
     with open('./new_colleagues.csv', 'r') as file:

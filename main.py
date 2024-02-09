@@ -24,6 +24,7 @@ from utils.openspace import Openspace
 # print('done')
 #--------------------------------------
 #doe hier:
-#import de lijst met collega's
+#import de lijst met collega's?
 #maak een openspace
-#openspace.organize(names=[]) -> add alle mensen vd lijst
+#openspace.organize(names=[]) -> add alle mensen vd lijst?
+#Mss een def maken in fileUtils waar 'def import():' met alle imports ineens 

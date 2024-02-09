@@ -1,6 +1,3 @@
-#In openspace.py create a class Openspace that contains these attributes:
-
-# tables which is a list of Table. (you will need to import Table from table.py).
 
 from table import Table, Seat
 from file_utils import call_data
@@ -9,9 +6,13 @@ import random as r
 
 class Openspace():
     def __init__(self, number_of_tables= 6, seats_per_table=4):
-        '''tablecount = amount of tables (default= 4)
-        this amount will be assigned on initialisation of the object
-        tables = list of all tables in the space'''
+        '''Class openspace, creates an environment with x tables with y seats each where:
+        x= number_of_tables (default= 6) & y= seats_per_table (default= 4).
+        -organize(names): takes a list of names, randomly shuffles them and assigns them to seats at tables.
+        If some people were unable to be seated, a list will be returned.
+        -display(): goes over each table and returns the seat assignment.
+        -store(filename): stores the repartition in an excel file.'''
+
         self.tables = []
         self.number_of_tables = number_of_tables
         self.seats_per_table = seats_per_table
@@ -21,17 +22,13 @@ class Openspace():
         self.waiting_line =[]
 
     def organize(self, names = call_data()):
-        '''Randomly assign people to Seat objects in the different Table objects'''
-        #maak nog random via r.shuffle(colleagues)
+        '''default list of names= call_data(), adjust data-source in file_utils.py if needed'''
         colleagues = names
-        full_tables = 0
+        r.shuffle(colleagues)
         for i in range(len(colleagues)):
             #goes over each table
             if i > (self.number_of_tables*self.seats_per_table): 
-                    '''Checks if number of student selected in is equal to tables*seats/table, 
-                    to see if there's enough places. Should I look for a way to easily swap this parameter from outside?'''
                     self.waiting_line.append(colleagues[i])
-                    print(f'{colleagues[i]} has no seat')
             else:
                 for n in range(self.number_of_tables):
                     if not self.tables[n].has_free_spot():
@@ -39,22 +36,24 @@ class Openspace():
                     else:
                         self.tables[n].assign_seat(colleagues[i])
                         break
+        if len(self.waiting_line) > 0:
+               print(f"The following people were unable to take a seat: {self.waiting_line}\nPlease add {len(self.waiting_line)} chairs.")
+        else:
+             print('Everybody is seated.')
+    def display(self):
+         for i in range(len(self.tables)):
+            seat_assignments = []
+            for seat in self.tables[i].seats:
+                seat_assignments.append(seat.occupant)
+            print(f"At table {i+1} the seats are assigned as follows:\n{seat_assignments}")
             
-        #hou rekening met manier om te zorgen dat niemand op zelfde seat zit als dag ervoor? -> extra
-
-            
-    #def display():
-        #'''display the different tables and there occupants in a nice and readable way'''
-        # for table in room1.tables:
-    #     table.who_sits_here()
     # def store(filename):
     #     '''store the repartition in an excel file'''
 
 
 #----------testing----------------
-room1 = Openspace(4)
+room1 = Openspace(5)
 room1.organize()
-for table in room1.tables:
-    table.who_sits_here()
-print(f"Still unseated are: {room1.waiting_line}")
-#issue: 1 person missing?
+room1.display()
+#issue: 1 person missing? -> unrandomize & play with 6/5 tables
+#hou rekening met manier om te zorgen dat niemand op zelfde seat zit als dag ervoor? -> extra
